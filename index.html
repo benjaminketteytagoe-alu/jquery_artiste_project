@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artiste Gallery — Premium Collection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-icon">✦</span>
+          <span class="logo-text">Artiste Gallery</span>
+        </a>
+        <nav class="main-nav">
+          <a href="index.html" class="nav-link active">Gallery</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+        <button class="btn btn-primary btn-add" id="btnAddArtiste">
+          <span class="btn-icon">+</span> Add Artiste
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Discover Extraordinary <span class="text-gold">Artiste</span></h1>
+      <p class="hero-subtitle">Browse through our curated collection of talented performers and creative minds.</p>
+    </div>
+  </section>
+
+  <!-- Search & Filter Bar -->
+  <section class="filter-bar">
+    <div class="container">
+      <div class="filter-inner">
+        <div class="search-box">
+          <span class="search-icon">⌕</span>
+          <input type="text" id="searchInput" placeholder="Search artiste by name or genre...">
+        </div>
+        <div class="filter-options">
+          <select id="filterGenre">
+            <option value="">All Genres</option>
+          </select>
+          <select id="sortBy">
+            <option value="name-asc">Name (A–Z)</option>
+            <option value="name-desc">Name (Z–A)</option>
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artiste Grid -->
+  <main class="main-content">
+    <div class="container">
+      <div class="artiste-grid" id="artisteGrid">
+        <!-- Artiste cards will be rendered here -->
+      </div>
+      <div class="loading" id="loadingIndicator">
+        <div class="spinner"></div>
+        <p>Loading artistes...</p>
+      </div>
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <span class="empty-icon">✦</span>
+        <h3>No artistes found</h3>
+        <p>Try adjusting your search or add a new artiste to the gallery.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal for Add/Edit Artiste -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add New Artiste</h2>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <form id="artisteForm" class="modal-body">
+        <input type="hidden" id="artisteId">
+        <div class="form-group">
+          <label for="inputName">Full Name <span class="required">*</span></label>
+          <input type="text" id="inputName" placeholder="e.g. John Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="inputGenre">Genre <span class="required">*</span></label>
+          <input type="text" id="inputGenre" placeholder="e.g. R&B, Pop, Jazz" required>
+        </div>
+        <div class="form-group">
+          <label for="inputImage">Image URL <span class="required">*</span></label>
+          <input type="url" id="inputImage" placeholder="https://example.com/photo.jpg" required>
+          <div class="image-preview" id="imagePreview">
+            <img src="" alt="Preview" id="previewImg">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputBio">Short Bio</label>
+          <textarea id="inputBio" rows="3" placeholder="A brief description of the artiste..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="inputSocials">Social Media (comma-separated URLs)</label>
+          <input type="text" id="inputSocials" placeholder="https://instagram.com/..., https://twitter.com/...">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btnCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSubmit">Save Artiste</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" id="deleteOverlay">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2>Confirm Deletion</h2>
+        <button class="modal-close" id="deleteClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to remove <strong id="deleteArtisteName"></strong> from the gallery? This action cannot be undone.</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btnCancelDelete">Cancel</button>
+          <button type="button" class="btn btn-danger" id="btnConfirmDelete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <!-- Brand Column -->
+        <div class="footer-col footer-col--brand">
+          <a href="index.html" class="footer-logo">
+            <span class="footer-logo-icon">✦</span>
+            <span class="footer-logo-text">Artiste Gallery</span>
+          </a>
+          <p class="footer-tagline">Discover extraordinary artistes from around the world. Our curated collection celebrates talent, creativity, and musical excellence.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="#" class="footer-social-link" aria-label="Twitter / X">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="footer-social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="footer-social-link" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Gallery</a></li>
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Genres Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Genres</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Pop</a></li>
+            <li><a href="index.html" class="footer-link">R&amp;B</a></li>
+            <li><a href="index.html" class="footer-link">Jazz</a></li>
+            <li><a href="index.html" class="footer-link">Hip-Hop</a></li>
+            <li><a href="index.html" class="footer-link">Soul</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-contact">
+            <li>
+              <span class="footer-contact-icon">✉</span>
+              <a href="mailto:hello@artistegallery.com" class="footer-link">hello@artistegallery.com</a>
+            </li>
+            <li>
+              <span class="footer-contact-icon">☎</span>
+              <a href="tel:+1234567890" class="footer-link">+1 (234) 567-890</a>
+            </li>
+            <li>
+              <span class="footer-contact-icon">◎</span>
+              <span class="footer-link">Los Angeles, CA</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2024 Artiste Gallery. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#" class="footer-legal-link">Privacy Policy</a>
+          <a href="#" class="footer-legal-link">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
