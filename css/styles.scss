@@ -1,0 +1,1481 @@
+// ============================================
+// Artiste Gallery — Premium SCSS Styles
+// ============================================
+
+// --- Color Palette ---
+$color-bg-dark:       #0d0d0d;
+$color-bg-card:       #1a1a1a;
+$color-bg-modal:      #1e1e1e;
+$color-bg-input:      #2a2a2a;
+$color-gold:          #c9a84c;
+$color-gold-light:    #e2c97e;
+$color-gold-dark:     #a68a3e;
+$color-text-primary:  #f5f0e8;
+$color-text-secondary:#a89f91;
+$color-text-muted:    #6b6560;
+$color-border:        #2e2e2e;
+$color-danger:        #c0392b;
+$color-danger-hover:  #e74c3c;
+$color-success:       #27ae60;
+$color-overlay:       rgba(0, 0, 0, 0.75);
+
+// --- Typography ---
+$font-heading: 'Playfair Display', Georgia, serif;
+$font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+// ============================================
+// Typography — Headings
+// ============================================
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.3;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1rem; }
+
+// --- Spacing ---
+$spacing-xs:  0.25rem;
+$spacing-sm:  0.5rem;
+$spacing-md:  1rem;
+$spacing-lg:  1.5rem;
+$spacing-xl:  2rem;
+$spacing-2xl: 3rem;
+$spacing-3xl: 4rem;
+
+// --- Layout ---
+$container-max: 1280px;
+$border-radius: 8px;
+$border-radius-lg: 12px;
+$transition: all 0.3s ease;
+
+// ============================================
+// Reset & Base
+// ============================================
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-body;
+  background-color: $color-bg-dark;
+  color: $color-text-primary;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+// ============================================
+// Container
+// ============================================
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $spacing-xl;
+}
+
+// ============================================
+// Header
+// ============================================
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13, 13, 13, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid $color-border;
+  padding: $spacing-md 0;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-xl;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-heading;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: $color-gold;
+}
+
+.logo-icon {
+  font-size: 1.6rem;
+}
+
+.main-nav {
+  display: flex;
+  gap: $spacing-xl;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: $color-text-secondary;
+  transition: $transition;
+  position: relative;
+  padding: $spacing-xs 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: $color-gold;
+    transition: $transition;
+  }
+
+  &:hover,
+  &.active {
+    color: $color-gold;
+  }
+
+  &:hover::after,
+  &.active::after {
+    width: 100%;
+  }
+}
+
+// ============================================
+// Buttons
+// ============================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $border-radius;
+  font-family: $font-body;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition;
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, $color-gold, $color-gold-dark);
+  color: $color-bg-dark;
+
+  &:hover {
+    background: linear-gradient(135deg, $color-gold-light, $color-gold);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+  }
+}
+
+.btn-secondary {
+  background: $color-bg-input;
+  color: $color-text-primary;
+  border: 1px solid $color-border;
+
+  &:hover {
+    background: $color-border;
+  }
+}
+
+.btn-danger {
+  background: $color-danger;
+  color: #fff;
+
+  &:hover {
+    background: $color-danger-hover;
+  }
+}
+
+.btn-sm {
+  padding: $spacing-xs $spacing-md;
+  font-size: 0.8rem;
+}
+
+// ============================================
+// Hero Section
+// ============================================
+.hero {
+  text-align: center;
+  padding: $spacing-3xl 0 $spacing-2xl;
+}
+
+.hero-title {
+  font-family: $font-heading;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: $spacing-md;
+}
+
+.text-gold {
+  color: $color-gold;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: $color-text-secondary;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// ============================================
+// Filter Bar
+// ============================================
+.filter-bar {
+  padding: 0 0 $spacing-2xl;
+}
+
+.filter-inner {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: $spacing-md;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $color-text-muted;
+  font-size: 1.1rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: $spacing-md $spacing-lg $spacing-md 2.8rem;
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  color: $color-text-primary;
+  font-family: $font-body;
+  font-size: 0.95rem;
+  transition: $transition;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-gold;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+  }
+}
+
+.filter-options {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.filter-options select {
+  padding: $spacing-md $spacing-lg;
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  color: $color-text-primary;
+  font-family: $font-body;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: $transition;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a89f91' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 2.5rem;
+
+  &:focus {
+    outline: none;
+    border-color: $color-gold;
+  }
+}
+
+// ============================================
+// Artiste Grid
+// ============================================
+.main-content {
+  padding-bottom: $spacing-3xl;
+}
+
+.artiste-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: $spacing-xl;
+}
+
+// --- Artiste Card ---
+.artiste-card {
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  transition: $transition;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $color-gold;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  &__image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    background: $color-bg-input;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+
+    .artiste-card:hover & {
+      transform: scale(1.05);
+    }
+  }
+
+  &__genre-badge {
+    position: absolute;
+    top: $spacing-md;
+    right: $spacing-md;
+    background: rgba(201, 168, 76, 0.9);
+    color: $color-bg-dark;
+    padding: $spacing-xs $spacing-md;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__id-badge {
+    position: absolute;
+    top: $spacing-md;
+    left: $spacing-md;
+    background: rgba(13, 13, 13, 0.85);
+    color: $color-gold-light;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    font-family: $font-body;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    backdrop-filter: blur(4px);
+  }
+
+  &__body {
+    padding: $spacing-lg;
+  }
+
+  &__name {
+    font-family: $font-heading;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: $spacing-sm;
+    color: $color-text-primary;
+  }
+
+  &__bio {
+    font-size: 0.85rem;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-md;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    padding-top: $spacing-md;
+    border-top: 1px solid $color-border;
+  }
+
+  &__action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    background: transparent;
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+    color: $color-text-secondary;
+    font-family: $font-body;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: $transition;
+
+    &:hover {
+      border-color: $color-gold;
+      color: $color-gold;
+    }
+
+    &--delete:hover {
+      border-color: $color-danger;
+      color: $color-danger;
+    }
+  }
+}
+
+// ============================================
+// Loading State
+// ============================================
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-3xl 0;
+  color: $color-text-secondary;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid $color-border;
+  border-top-color: $color-gold;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: $spacing-md;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============================================
+// Empty State
+// ============================================
+.empty-state {
+  text-align: center;
+  padding: $spacing-3xl 0;
+  color: $color-text-secondary;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: $color-gold;
+  display: block;
+  margin-bottom: $spacing-md;
+}
+
+.empty-state h3 {
+  font-family: $font-heading;
+  font-size: 1.5rem;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+// ============================================
+// Modal
+// ============================================
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $color-overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: $transition;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.modal {
+  background: $color-bg-modal;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: $transition;
+
+  .modal-overlay.active & {
+    transform: translateY(0);
+  }
+
+  &-sm {
+    max-width: 420px;
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg $spacing-xl;
+  border-bottom: 1px solid $color-border;
+}
+
+.modal-header h2 {
+  font-family: $font-heading;
+  font-size: 1.4rem;
+  color: $color-gold;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: $color-text-muted;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: $transition;
+  line-height: 1;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+}
+
+.modal-body {
+  padding: $spacing-xl;
+}
+
+// ============================================
+// Form
+// ============================================
+.form-group {
+  margin-bottom: $spacing-lg;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.required {
+  color: $color-gold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: $spacing-md;
+  background: $color-bg-input;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  color: $color-text-primary;
+  font-family: $font-body;
+  font-size: 0.95rem;
+  transition: $transition;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-gold;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+  }
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.image-preview {
+  margin-top: $spacing-md;
+  display: none;
+}
+
+.image-preview.has-image {
+  display: block;
+}
+
+.image-preview img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: $border-radius;
+  border: 1px solid $color-border;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+}
+
+// ============================================
+// Toast Notifications
+// ============================================
+.toast-container {
+  position: fixed;
+  bottom: $spacing-xl;
+  right: $spacing-xl;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  background: $color-bg-modal;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  color: $color-text-primary;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  animation: slideIn 0.3s ease;
+  min-width: 280px;
+
+  &--success {
+    border-left: 4px solid $color-success;
+  }
+
+  &--error {
+    border-left: 4px solid $color-danger;
+  }
+
+  &--info {
+    border-left: 4px solid $color-gold;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+// ============================================
+// Footer
+// ============================================
+.site-footer {
+  background: $color-bg-card;
+  border-top: 1px solid $color-border;
+  padding: $spacing-3xl 0 0;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: $spacing-2xl;
+  padding-bottom: $spacing-2xl;
+}
+
+// --- Brand Column ---
+.footer-col--brand {
+  padding-right: $spacing-2xl;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-heading;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: $color-gold;
+  margin-bottom: $spacing-md;
+}
+
+.footer-logo-icon {
+  font-size: 1.5rem;
+}
+
+.footer-tagline {
+  font-size: 0.9rem;
+  color: $color-text-secondary;
+  line-height: 1.7;
+  margin-bottom: $spacing-lg;
+  max-width: 300px;
+}
+
+// --- Social Links ---
+.footer-socials {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: $color-bg-input;
+  border: 1px solid $color-border;
+  color: $color-text-secondary;
+  transition: $transition;
+
+  &:hover {
+    background: $color-gold;
+    border-color: $color-gold;
+    color: $color-bg-dark;
+    transform: translateY(-2px);
+  }
+}
+
+// --- Column Headings ---
+.footer-heading {
+  font-family: $font-heading;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-text-primary;
+  margin-bottom: $spacing-lg;
+  position: relative;
+  padding-bottom: $spacing-md;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: $color-gold;
+  }
+}
+
+// --- Footer Links ---
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: $spacing-sm;
+}
+
+.footer-link {
+  font-size: 0.9rem;
+  color: $color-text-secondary;
+  transition: $transition;
+  display: inline-block;
+
+  &:hover {
+    color: $color-gold;
+    transform: translateX(4px);
+  }
+}
+
+// --- Contact List ---
+.footer-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+}
+
+.footer-contact-icon {
+  color: $color-gold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+}
+
+// --- Footer Bottom ---
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg 0;
+  border-top: 1px solid $color-border;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+.footer-copyright {
+  font-size: 0.85rem;
+  color: $color-text-muted;
+}
+
+.footer-legal {
+  display: flex;
+  gap: $spacing-lg;
+}
+
+.footer-legal-link {
+  font-size: 0.85rem;
+  color: $color-text-muted;
+  transition: $transition;
+
+  &:hover {
+    color: $color-gold;
+  }
+}
+
+// ============================================
+// Shared Page Styles (About & Contact)
+// ============================================
+
+// --- Page Header ---
+.page-header {
+  text-align: center;
+  padding: $spacing-3xl 0 $spacing-2xl;
+  border-bottom: 1px solid $color-border;
+  margin-bottom: $spacing-3xl;
+}
+
+.page-title {
+  font-family: $font-heading;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: $spacing-md;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: $color-text-secondary;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// --- Section Title ---
+.section-title {
+  font-family: $font-heading;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: $spacing-xl;
+  line-height: 1.3;
+
+  &--center {
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+// --- About Section ---
+.about-section {
+  padding-bottom: $spacing-3xl;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-3xl;
+  align-items: center;
+}
+
+.about-text {
+  font-size: 1rem;
+  color: $color-text-secondary;
+  line-height: 1.8;
+  margin-bottom: $spacing-lg;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.about-image {
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  border: 1px solid $color-border;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// --- Stats Section ---
+.stats-section {
+  padding: $spacing-3xl 0;
+  background: $color-bg-card;
+  margin: 0 calc(-1 * $spacing-xl);
+  padding-left: $spacing-xl;
+  padding-right: $spacing-xl;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-xl;
+  max-width: $container-max;
+  margin: 0 auto;
+}
+
+.stat-card {
+  text-align: center;
+  padding: $spacing-xl;
+}
+
+.stat-number {
+  display: block;
+  font-family: $font-heading;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $color-gold;
+  margin-bottom: $spacing-sm;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: $color-text-secondary;
+}
+
+// --- Values Section ---
+.values-section {
+  padding: $spacing-3xl 0;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+}
+
+.value-card {
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  text-align: center;
+  transition: $transition;
+
+  &:hover {
+    border-color: $color-gold;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.value-icon {
+  display: block;
+  font-size: 2rem;
+  color: $color-gold;
+  margin-bottom: $spacing-md;
+}
+
+.value-title {
+  font-family: $font-heading;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: $spacing-sm;
+  color: $color-text-primary;
+}
+
+.value-text {
+  font-size: 0.9rem;
+  color: $color-text-secondary;
+  line-height: 1.7;
+}
+
+// --- Team Section ---
+.team-section {
+  padding: $spacing-3xl 0;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-xl;
+}
+
+.team-card {
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  text-align: center;
+  transition: $transition;
+
+  &:hover {
+    border-color: $color-gold;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  &__image-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto $spacing-lg;
+    border: 3px solid $color-gold;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__name {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: $spacing-xs;
+    color: $color-text-primary;
+  }
+
+  &__role {
+    font-size: 0.85rem;
+    color: $color-gold;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__bio {
+    font-size: 0.85rem;
+    color: $color-text-secondary;
+    line-height: 1.6;
+  }
+}
+
+// --- Contact Section ---
+.contact-section {
+  padding: 0 0 $spacing-3xl;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: $spacing-3xl;
+  align-items: start;
+}
+
+.contact-form-wrapper {
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-lg;
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+}
+
+// --- Contact Info ---
+.contact-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.contact-details {
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+}
+
+.contact-item {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg 0;
+  border-bottom: 1px solid $color-border;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.contact-item-icon {
+  font-size: 1.2rem;
+  color: $color-gold;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+  margin-top: $spacing-xs;
+}
+
+.contact-item-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: $color-text-muted;
+  margin-bottom: $spacing-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contact-item-value {
+  font-size: 0.95rem;
+  color: $color-text-primary;
+  transition: $transition;
+
+  &:hover {
+    color: $color-gold;
+  }
+}
+
+.contact-item-note {
+  font-size: 0.8rem;
+  color: $color-text-muted;
+  margin-top: $spacing-xs;
+}
+
+// --- Contact Socials ---
+.contact-socials {
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+}
+
+.contact-socials-title {
+  font-family: $font-heading;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $color-text-primary;
+  margin-bottom: $spacing-lg;
+}
+
+.contact-socials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
+}
+
+.contact-social-card {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: $color-bg-input;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  color: $color-text-secondary;
+  font-size: 0.85rem;
+  transition: $transition;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: $color-gold;
+    border-color: $color-gold;
+    color: $color-bg-dark;
+  }
+}
+
+// --- Contact Map ---
+.contact-map {
+  position: relative;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  border: 1px solid $color-border;
+  height: 200px;
+}
+
+.contact-map-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-map-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: $spacing-lg;
+  text-align: center;
+}
+
+.contact-map-pin {
+  font-size: 1.5rem;
+  color: $color-gold;
+  display: block;
+  margin-bottom: $spacing-xs;
+}
+
+.contact-map-overlay p {
+  font-size: 0.9rem;
+  color: $color-text-primary;
+}
+
+// --- FAQ Section ---
+.faq-section {
+  padding: $spacing-3xl 0;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-xl;
+}
+
+.faq-item {
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  transition: $transition;
+
+  &:hover {
+    border-color: $color-gold;
+  }
+}
+
+.faq-question {
+  font-family: $font-heading;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+  line-height: 1.4;
+}
+
+.faq-answer {
+  font-size: 0.9rem;
+  color: $color-text-secondary;
+  line-height: 1.7;
+}
+
+// ============================================
+// Responsive
+// ============================================
+@media (max-width: 1024px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-xl;
+  }
+
+  .footer-col--brand {
+    grid-column: 1 / -1;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+  }
+
+  .about-image {
+    order: -1;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    gap: $spacing-md;
+  }
+
+  .main-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .filter-inner {
+    flex-direction: column;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .filter-options {
+    width: 100%;
+  }
+
+  .filter-options select {
+    flex: 1;
+  }
+
+  .artiste-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+
+  .modal {
+    margin: $spacing-md;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+  }
+
+  .footer-col--brand {
+    grid-column: auto;
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .footer-tagline {
+    max-width: 100%;
+  }
+
+  .footer-socials {
+    justify-content: center;
+  }
+
+  .footer-heading {
+    text-align: center;
+
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .footer-links li {
+    text-align: center;
+  }
+
+  .footer-link:hover {
+    transform: none;
+  }
+
+  .footer-contact li {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-legal {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 $spacing-md;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .artiste-grid {
+    grid-template-columns: 1fr;
+  }
+}
